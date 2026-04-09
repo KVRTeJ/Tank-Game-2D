@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(tank_game_2d VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(QT_QML_GENERATE_QMLLS_INI ON)
 
@@ -10,13 +11,17 @@ find_package(Qt6 REQUIRED COMPONENTS Quick)
 qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(apptank_game_2d
-    main.cpp
+    src/main.cpp
 )
 
 qt_add_qml_module(apptank_game_2d
     URI tank_game_2d
     QML_FILES
-        Main.qml
+        resources/Main.qml
+    SOURCES
+        include/core/eventbus.hpp
+        include/systems/gamecontroller.hpp
+        src/systems/gamecontroller.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
