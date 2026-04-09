@@ -2,7 +2,7 @@
 
 #include <functional>
 #include <unordered_map>
-#include <list>
+#include <vector>
 #include <typeindex>
 
 class EventBus {
@@ -33,5 +33,5 @@ public:
     EventBus(EventBus&& other) = default;
     EventBus& operator=(EventBus&& other) = default;
 private:
-    std::unordered_map<std::type_index, std::list<std::function<void(const void*)>>> _subscribers; //! no thread selfly
+    std::unordered_map<std::type_index, std::vector<std::function<void(const void*)>>> _subscribers; //! no thread selfly
 };
