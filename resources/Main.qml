@@ -1,4 +1,7 @@
 import QtQuick
+import QtQuick.Controls
+
+import keyHandler
 
 Window {
     width: 640
@@ -6,38 +9,29 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    Rectangle {
+    Dial {
         id: movableRect
-        color: "black"
 
         width: 50
         height: 50
         visible: true
         focus: true
 
-        Keys.onPressed: (event) => {
-            let step = 10
+        KeyHandler {
+            id: keyHandler
+        }
 
-            if (event.key === Qt.Key_Left)
-                movableRect.x -= step
-            else if (event.key === Qt.Key_Right)
-                movableRect.x += step
-            else if (event.key === Qt.Key_Up)
-                movableRect.y -= step
-            else if (event.key === Qt.Key_Down)
-                movableRect.y += step
+        Keys.onPressed: (event) => {
+            if (event.isAutoRepeat)
+                return;
+
+            keyHandler.handleKeyPressed(event.key, event.modifiers)
         }
         Keys.onReleased: (event) => {
-            let step = 10
+            if (event.isAutoRepeat)
+                return;
 
-            if (event.key === Qt.Key_Left)
-                movableRect.x -= step
-            else if (event.key === Qt.Key_Right)
-                movableRect.x += step
-            else if (event.key === Qt.Key_Up)
-                movableRect.y -= step
-            else if (event.key === Qt.Key_Down)
-                movableRect.y += step
+            keyHandler.handleKeyReleased(event.key, event.modifiers)
         }
     }
 }

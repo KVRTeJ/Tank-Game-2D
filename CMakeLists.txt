@@ -20,8 +20,12 @@ qt_add_qml_module(apptank_game_2d
         resources/Main.qml
     SOURCES
         include/core/eventbus.hpp
+        include/systems/input/inputhandler.hpp
+        include/systems/input/keyhandler.hpp
         include/systems/gamecontroller.hpp
         src/systems/gamecontroller.cpp
+        SOURCES
+        SOURCES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
